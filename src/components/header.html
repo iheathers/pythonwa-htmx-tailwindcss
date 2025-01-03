@@ -1,27 +1,4 @@
-<style>
-    body {
-        margin: 0;
-        padding-top: 64px;
-        /* Adjust this value to match the height of your nav */
-    }
-
-    nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        background-color: white;
-        /* Ensure background covers content below */
-    }
-
-    .peer-checked+label+div {
-        z-index: 999;
-        /* Ensure dropdown is above everything */
-    }
-</style>
-
-<nav style="border: 1px solid red;">
+<nav class="fixed top-0 left-0 w-full bg-white z-1000 border border-red-500">
     <div class="md:relative max-w-screen-xl p-4 mx-auto flex flex-wrap items-center justify-between md:justify-center">
         <!-- Logo -->
         <a href="/" class="md:absolute left-5">
@@ -29,7 +6,7 @@
         </a>
         <!-- Toggle Button -->
         <input type="checkbox" id="menu-toggle" class="hidden peer">
-        <label for="menu-toggle" class="md:hidden">
+        <label for="menu-toggle" class="md:hidden cursor-pointer">
             <span class="sr-only">Open main menu</span>
             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -38,22 +15,22 @@
         </label>
 
         <!-- Navigation Menu -->
-        <div style="border: 1px solid blue;" class="hidden md:block peer-checked:block w-full md:w-auto">
+        <div class="hidden md:block peer-checked:block w-full md:w-auto border border-blue-500 bg-white z-50 md:z-auto">
             <ul class="flex flex-col md:flex-row p-4 md:p-0 md:space-x-8">
                 <li>
-                    <a href="#">Events</a>
+                    <a href="#" class="block px-2 py-1 hover:text-blue-500">Events</a>
                 </li>
                 <li>
-                    <a href="#">Photos</a>
+                    <a href="#" class="block px-2 py-1 hover:text-blue-500">Photos</a>
                 </li>
                 <li>
-                    <a href="#">Sponsors</a>
+                    <a href="#" class="block px-2 py-1 hover:text-blue-500">Sponsors</a>
                 </li>
                 <li>
-                    <a href="#">Code With Us</a>
+                    <a href="#" class="block px-2 py-1 hover:text-blue-500">Code With Us</a>
                 </li>
                 <li>
-                    <a href="#">Conduct</a>
+                    <a href="#" class="block px-2 py-1 hover:text-blue-500">Conduct</a>
                 </li>
             </ul>
         </div>
