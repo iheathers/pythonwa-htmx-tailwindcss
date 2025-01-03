@@ -9,9 +9,14 @@
     <script src="dist/main.js"></script>
 </head>
 
-<body class="bg-orange-400 text-white">
-    <div hx-post="/mouse_entered" hx-trigger="mouseenter">
-        [Here Mouse, Mouse!] is this right?
+<body>
+    <!-- Replace this part with header.html -->
+    <div hx-get="./src/components/header.html" hx-trigger="load">
+        Header
+    </div>
+
+    <div hx-get="./src/components/hero.html" hx-trigger="load">
+        hero
     </div>
 
 </body>
