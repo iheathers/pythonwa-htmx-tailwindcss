@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "watch:css": "npx tailwindcss -i ./src/styles/main.css -o ./dist/styles.css --watch",
-    "serve": "serve -l 5000"
+    "serve": "serve -l 5000",
+    "build": "npx tailwindcss -i ./src/styles/main.css -o ./dist/styles.css"
   },
   "keywords": [],
   "author": "",
