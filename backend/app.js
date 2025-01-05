@@ -12,6 +12,8 @@ app.use(
     })
 );
 
+console.log("again")
+
 // Regex patterns
 const P_PATTERN = /<p>(.+?)<\/p>/g;
 const URL_PATTERN = /(<a href="((http|https):\/\/)?[a-zA-Z0-9./?:@\-_=#]+\.([a-zA-Z]){2,6}([a-zA-Z0-9.&/?:@\-_=#]+)]\(((http|https):\/\/)?[a-zA-Z0-9./?:@\-_=#]+\.([a-zA-Z]){2,6}([a-zA-Z0-9.&/?:@\-_=#]+)" class="linkified">)/g;
@@ -45,6 +47,47 @@ function convertMarkdown(mdText) {
     return html;
 }
 
+
+/**
+ * Format timestamp and UTC offset into the desired format
+ * @param {number} timestamp - Timestamp in milliseconds
+ * @param {number} utcOffset - UTC offset in milliseconds
+ * @returns {string} - Formatted date and time
+ */
+function formatTimeToGmtWithOffset(timestamp) {
+    // Convert the timestamp from milliseconds to a Date object
+    const date = new Date(timestamp);
+
+    const options = {
+        timeZone: 'Etc/GMT-8', // Direct GMT+8 representation
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+    };
+
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    const formattedDate = formatter.format(date);
+
+    // Append the GMT+8 label
+    return `${formattedDate} GMT+8`;
+}
+
+
+/**
+ * Format venue details
+ * @param {object} venue - Venue object
+ * @returns {string} - Formatted venue string
+ */
+function formatVenue(venue) {
+    if (venue && venue.name && venue.address_1) {
+        return `${venue.name} @ ${venue.address_1}`;
+    }
+    return "Venue details unavailable";
+}
+
 app.get('/api/events', async (req, res) => {
     try {
         // Fetch events from the Meetup API
@@ -55,15 +98,20 @@ app.get('/api/events', async (req, res) => {
         const parsedEvents = events.map(event => {
             const decodedDescription = he.decode(event.description || ''); // Decode HTML entities
 
-            console.log("Decoded Description:", decodedDescription);
+            // console.log("Decoded Description:", decodedDescription);
 
             const parsedDescription = convertMarkdown(decodedDescription); // Convert Markdown to HTML
 
-            console.log("Parsed Description:", parsedDescription);
+            // console.log("Parsed Description:", parsedDescription);
+
+            const formattedTime = formatTimeToGmtWithOffset(event.time, event.utc_offset);
+            const formattedVenue = formatVenue(event.venue);
 
             return {
                 ...event,
                 description: parsedDescription,
+                time: formattedTime,
+                venue: formattedVenue,
             };
         });
 

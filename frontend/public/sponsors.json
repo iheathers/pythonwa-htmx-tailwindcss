@@ -1,0 +1,20 @@
+[
+  {
+    "sponsorName": "Horizon Digital",
+    "sponsorType": "Major Sponsor",
+    "sponsorUrl": "https://horizondigital.au/",
+    "sponsorImageUrl": "public/assets/horizon_logo_sig.png"
+  },
+  {
+    "sponsorName": "Ben Fitzhardinge",
+    "sponsorType": "Hosting Sponsor",
+    "sponsorUrl": "http://benjamin.dog/",
+    "sponsorImageUrl": "public/assets/benjamin_dog.png"
+  },
+  {
+    "sponsorName": "Spacecubed",
+    "sponsorType": "Venue Sponsor",
+    "sponsorUrl": "https://spacecubed.com/",
+    "sponsorImageUrl": "public/assets/spacecubed.png"
+  }
+]

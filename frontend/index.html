@@ -4,27 +4,254 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>JS Bin</title>
+    <link rel="icon" href="public/assets/favicon.ico">
+    <title>PythonWA</title>
     <meta name="htmx-config" content='{"selfRequestsOnly":false}'>
     <script src="https://unpkg.com/htmx.org@2.0.0"></script>
     <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
 
+    <link rel="stylesheet" href="dist/styles.css">
+
 </head>
 
 <body>
-    <div hx-ext="client-side-templates">
-        <div hx-get="http://localhost:3000/api/events" mustache-array-template="foo" hx-trigger="load">
-            Click Me
+
+    <!-- Header -->
+    <div hx-get="src/components/header.html" hx-trigger="load" hx-swap="outerHTML">
+
+    </div>
+
+    <!-- HERO -->
+
+    <div hx-get="src/components/hero.html" hx-trigger="load" hx-swap="outerHTML">
+
+    </div>
+
+
+    <!-- TALKS -->
+
+    <section class="md:max-w-4xl mx-auto mb-20">
+        <div class="bg-white border-b px-4 py-5 sm:px-6 shadow rounded-t-md">
+            <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+                <div class="ml-4 mt-2">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Upcoming Events
+                    </h3>
+                </div>
+            </div>
         </div>
 
+        <div hx-ext="client-side-templates" hx-get="http://localhost:3000/api/events"
+            mustache-array-template="events-template" hx-trigger="load" hx-swap="outerHTML">
+            Loading
+        </div>
 
-        <template id="foo">
-            {{#data}}
-            {{{description}}}
-            {{/data}}
-        </template>
+    </section>
+
+
+
+    <template id="events-template">
+        <div class="bg-white shadow rounded-b-md">
+            <ul class="divide-y divide-gray-200">
+                {{#data}}
+                <li>
+                    <div class="p-4 sm:p-6">
+                        <a href="{{link}}" class="block hover:bg-gray-50">
+                            <p class="font-medium text-blue-600 truncate">{{name}}</p>
+                        </a>
+                        <p class="mt-2 flex items-center text-sm text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="mr-1.5 h-5 w-5 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="truncate">{{local_date}} {{ local_time}}</span>
+                        </p>
+
+                        <p class="mt-2 flex items-center text-sm text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="mr-1.5 h-5 w-5 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+
+                            <span class="truncate">{{venue}}</span>
+                        </p>
+
+                        <p class="mt-2 flex items-center text-sm text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="mr-1.5 h-5 w-5 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+
+                            <span class="truncate">{{yes_rsvp_count}}</span>
+                        </p>
+                        <p class="mt-2 text-sm">
+                        <div class="text-sm [&_p]:mt-4 [&_p]:mb-4 [&_a]:text-blue-600">{{{description}}}</div>
+                        </p>
+                    </div>
+                </li>
+                {{/data}}
+            </ul>
+
+    </template>
+
+
+    <!-- PHOTOS -->
+    <div class="relative w-full md:w-[700px] m-auto flex gap-6 snap-x snap-mandatory overflow-x-auto pb-14 first:pl-4 last:pr-4 [&_*]:snap-center [&_*]:shrink-0 [&_*]:w-72 md:[&_*]:w-[550px] [&_*]:h-40 md:[&_*]:h-[350px] [&_*]:rounded-lg [&_*]:shadow-xl [&_*]:bg-white [&_*]:object-cover"
+        hx-get="public/assets.json" hx-trigger="load" hx-ext="client-side-templates"
+        mustache-array-template="image-template">
     </div>
+
+    <template id="image-template">
+        {{#data}}
+        <img src="{{.}}" alt="Dynamic Image">
+        {{/data}}
+    </template>
+
+    <!-- SPONSORS -->
+
+
+    <section id="sponsors">
+        <div class="mt-20 text-center">
+            <p class="max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-2xl md:max-w-3xl">
+                Thanks to our awesome sponsors
+            </p>
+        </div>
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex items-center">
+            <div class="flex-auto grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-6" hx-get="public/sponsors.json"
+                hx-trigger="load" hx-ext="client-side-templates" mustache-array-template="sponsor-template">
+            </div>
+        </div>
+    </section>
+
+    <template id="sponsor-template">
+        {{#data}}
+        <div class="col-span-3 flex justify-center md:col-span-3 lg:col-span-2">
+            <div class="flex grid grid-cols-1 items-center justify-center content-start">
+                <div class="flex col-span-full items-center justify-center">
+                    <p class="font-medium text-gray-500">{{sponsorType}}</p>
+                </div>
+                <div class="flex col-span-full items-center justify-center">
+                    <a href="{{sponsorUrl}}">
+                        <img class="h-auto max-h-36 max-w-xs" src="{{sponsorImageUrl}}" alt="{{sponsorName}}" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{/data}}
+    </template>
+
+    <!-- Github Code -->
+
+    <section id="code" class="mt-16 max-w-md mx-auto relative z-10 px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
+        aria-labelledby="contact-heading">
+        <h2 class="sr-only" id="contact-heading">Contact us</h2>
+        <div class="grid grid-cols-1 gap-y-20 lg:grid-cols-3 lg:gap-y-0 lg:gap-x-8">
+            <div class="flex flex-col bg-white rounded-2xl shadow-xl">
+                <div class="flex-1 relative pt-16 px-6 pb-8 md:px-8">
+                    <div
+                        class="absolute top-0 p-5 inline-block border-blue-600 rounded-xl shadow-lg transform -translate-y-1/2">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                            class="h-6 w-6 text-white" aria-hidden="true">
+                            <title>GitHub</title>
+                            <path
+                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-medium text-blue-gray-900">Code With Us!</h3>
+                    <p class="mt-4 text-base text-blue-gray-500">Fork us on Github</p>
+                    <p class="mt-4 text-base text-blue-gray-500">
+                        <a class="text-blue-500" href="https://github.com/bendog/pythonwa">
+                            https://github.com/bendog/pythonwa
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-col bg-white rounded-2xl shadow-xl">
+                <div class="flex-1 relative pt-16 px-6 pb-8 md:px-8">
+                    <div
+                        class="absolute top-0 p-5 inline-block border-blue-600 rounded-xl shadow-lg transform -translate-y-1/2">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                            class="h-6 w-6 text-white" aria-hidden="true">
+                            <title>GitHub</title>
+                            <path
+                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-medium text-blue-gray-900">Learning Resources</h3>
+                    <p class="mt-4 text-base text-blue-gray-500">Learn Python by sorting fuel prices</p>
+                    <p class="mt-4 text-base text-blue-gray-500">
+                        <a class="text-blue-500" href="https://github.com/robinchew/workshop_notes">
+                            https://github.com/robinchew/workshop_notes
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-col bg-white rounded-2xl shadow-xl">
+                <div class="flex-1 relative pt-16 px-6 pb-8 md:px-8">
+                    <div
+                        class="absolute top-0 p-5 inline-block border-blue-600 rounded-xl shadow-lg transform -translate-y-1/2">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                            class="h-6 w-6 text-white" aria-hidden="true">
+                            <title>GitHub</title>
+                            <path
+                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-medium text-blue-gray-900">You?</h3>
+                    <p class="mt-4 text-base text-blue-gray-500">Send us your code to be featured on the Python WA
+                        website
+                    </p>
+                    <p class="mt-4 text-base text-blue-gray-500">
+                        <a class="text-blue-500" href="https://github.com/">
+                            https://github.com/
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Code of Conduct -->
+
+    <section id="conduct" class="mt-16">
+        <div class="text-center">
+            <p class="mt-1 text-3xl font-extrabold text-gray-900 sm:tracking-tight">Code of Conduct</p>
+            <p class="max-w-3xl mt-2 mx-auto text-xl text-gray-500 p-4">
+                At Python WA, we want to create a community that is friendly and inviting for newbies and professionals
+                alike.
+                This is why we have adopted the
+                <a class="text-blue-700" href="https://www.djangoproject.com/conduct/" target="_blank">
+                    Django Code of Conduct
+                </a>
+                that applies to our events, Slack channel and all associated activities.
+            </p>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer class="mt-24 bg-gray-100 sm:mt-12">
+        <div class="mx-auto max-w-md py-6 px-4 overflow-hidden sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
+            <p class="mt-4 text-center text-base text-gray-400">
+                &copy; 2021 Python WA
+            </p>
+        </div>
+    </footer>
+
+
 </body>
 
 </html>
