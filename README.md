@@ -1,9 +1,12 @@
-Here's an updated, detailed step-by-step guide including the necessary navigation to the `frontend` directory.
+# **Setup and Development Guide**
+
+Follow these steps to set up the project and start development:
 
 ---
 
 ## **Step 1: Clone or Download the Project**
-1. Clone the repository or download it as a ZIP file and extract it.
+
+1. Clone the repository or download it as a ZIP file and extract its contents:
    ```bash
    git clone https://github.com/iheathers/pythonwa-htmx-tailwindcss.git
    cd pythonwa-htmx-tailwindcss
@@ -11,73 +14,61 @@ Here's an updated, detailed step-by-step guide including the necessary navigatio
 
 ---
 
-## **Step 2: Install Dependencies**
+## **Step 2: Install Frontend Dependencies**
 
-### **Step 2.1: Navigate to the `frontend` Directory**
-1. Go to the `frontend` directory to install its dependencies:
+1. Navigate to the `frontend` directory:
    ```bash
    cd frontend
    ```
 
-2. Install the dependencies listed in `frontend/package.json`:
+2. Install the required packages:
    ```bash
    npm install
    ```
 
----
-
-## **Step 3: Build and Watch Files**
-1. From the `frontend` directory, set up the build processes for Tailwind CSS and JavaScript.
-
-### **Watch CSS**
-1. Run the following command to start watching CSS:
+3. Start the Tailwind CSS watcher:
    ```bash
    npm run watch:css
    ```
 
-2. The build process will generate these files in the `frontend/dist` directory:
-   - `dist/styles.css`: The compiled Tailwind CSS file.
-
+   - The compiled CSS will be generated in the `frontend/dist` directory.
 
 ---
 
-## **Step 4: Start the Backend Server**
-1. Go back to the root directory:
+## **Step 3: Start the Backend Server**
+
+1. Navigate to the `backend` directory:
    ```bash
-   cd ..
+   cd ../backend
    ```
-2. Navigate to the `backend` directory:
-   ```bash
-   cd backend
-   ```
-3. Install backend dependencies:
+
+2. Install backend dependencies:
    ```bash
    npm install
    ```
-4. Start the backend server (assuming `app.js` is the entry point):
+
+3. Start the backend server:
    ```bash
    node app.js
    ```
 
 ---
 
-## **Step 5: Serve the Frontend**
-1. Go back to the `frontend` directory:
-   ```bash
-   cd ../frontend
-   ```
-2. Open the `index.html` file in a browser. You can use any of the following methods:
+## **Step 4: Serve the Frontend**
 
-### **Option A: Use a Live Server**
-1. If you’re using VS Code, install the **Live Server** extension.
-2. Right-click on `index.html` and select **Open with Live Server**.
+1. Open the `frontend/index.html` file in your browser using any method:
 
-## **Step 6: Development Workflow**
-1. During development:
-   - Keep the backend server running in one terminal.
-   - Keep the frontend file watcher (`npm run watch:css`) running in another terminal.
-2. Make your changes in the `frontend/src` directory:
-   - Update styles in `src/styles/main.css`.
-   - Update HTML components in `src/components`.
+   - **Option A:** Use a Live Server extension in Visual Studio Code.
+   - **Option B:** Open the file directly in your browser.
 
-The changes will automatically be reflected in the `dist` files and on the live server.
+---
+
+## **Development Workflow**
+
+- Keep the backend server running in one terminal.
+- Keep the Tailwind CSS watcher running in another terminal.
+- Make your changes in the `frontend/src` directory:
+  - Update styles in `src/styles/main.css`.
+  - Modify HTML components in `src/components`.
+
+Changes will automatically reflect in the browser if you're using a live server.
