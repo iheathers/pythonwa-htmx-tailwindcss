@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch:css": "npx tailwindcss -i ./src/styles/main.css -o ./dist/styles.css --watch"
+    "watch:css": "npx tailwindcss -i ./src/styles/main.css -o ./dist/styles.css --watch",
+    "serve": "serve -l 5000"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
   }
 }

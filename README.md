@@ -1,12 +1,12 @@
-# **Setup and Development Guide**
+# **Development Guide**
 
-Follow these steps to set up the project and start development:
+Follow these steps to set up and start working on the project.
 
 ---
 
-## **Step 1: Clone or Download the Project**
+## **Step 1: Clone the Project**
 
-1. Clone the repository or download it as a ZIP file and extract its contents:
+1. Clone the repository:
    ```bash
    git clone https://github.com/iheathers/pythonwa-htmx-tailwindcss.git
    cd pythonwa-htmx-tailwindcss
@@ -14,28 +14,28 @@ Follow these steps to set up the project and start development:
 
 ---
 
-## **Step 2: Install Frontend Dependencies**
+## **Step 2: Frontend Setup**
 
 1. Navigate to the `frontend` directory:
    ```bash
    cd frontend
    ```
 
-2. Install the required packages:
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-3. Start the Tailwind CSS watcher:
+3. **Optional:** If you plan to edit Tailwind CSS styles, start the watcher:
    ```bash
    npm run watch:css
    ```
 
-   - The compiled CSS will be generated in the `frontend/dist` directory.
+   - This will automatically recompile the CSS when changes are made to css in `index.html` or `src/styles/main.css`.
 
 ---
 
-## **Step 3: Start the Backend Server**
+## **Step 3: Backend Setup**
 
 1. Navigate to the `backend` directory:
    ```bash
@@ -47,7 +47,7 @@ Follow these steps to set up the project and start development:
    npm install
    ```
 
-3. Start the backend server:
+3. Start the backend server: (It runs on port 3000 by default)
    ```bash
    node app.js
    ```
@@ -56,19 +56,34 @@ Follow these steps to set up the project and start development:
 
 ## **Step 4: Serve the Frontend**
 
-1. Open the `frontend/index.html` file in your browser using any method:
+1. Go back to the `frontend` directory:
+   ```bash
+   cd ../frontend
+   ```
 
-   - **Option A:** Use a Live Server extension in Visual Studio Code.
-   - **Option B:** Open the file directly in your browser.
+2. Serve the frontend files locally:
+   ```bash
+   npm run serve
+   ```
+
+   This serves the project at `http://localhost:5000`.
+
+---
+
+## **When to Use `npm run watch:css`**
+
+- **Use it if** you are making changes to Tailwind CSS styles in `frontend/src/styles/main.css`.
+- **Skip it if** you’re not modifying any styles. The existing `dist/styles.css` will already be available for the project.
 
 ---
 
 ## **Development Workflow**
 
-- Keep the backend server running in one terminal.
-- Keep the Tailwind CSS watcher running in another terminal.
-- Make your changes in the `frontend/src` directory:
-  - Update styles in `src/styles/main.css`.
-  - Modify HTML components in `src/components`.
-
-Changes will automatically reflect in the browser if you're using a live server.
+1. **Frontend**:
+   - If editing styles, run `npm run watch:css`.
+   - Serve the frontend using `npm run serve`.
+2. **Backend**:
+   - Keep the backend server running (`node app.js`).
+3. Make changes to:
+   - Styles: `frontend/src/styles/main.css`.
+   - Components: `frontend/src/components`.
