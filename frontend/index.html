@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <meta name="htmx-config" content='{"selfRequestsOnly":false}'>
+    <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+    <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
+
+</head>
+
+<body>
+    <div hx-ext="client-side-templates">
+        <div hx-get="http://localhost:3000/api/events" mustache-array-template="foo" hx-trigger="load">
+            Click Me
+        </div>
+
+
+        <template id="foo">
+            {{#data}}
+            {{{description}}}
+            {{/data}}
+        </template>
+    </div>
+</body>
+
+</html>
