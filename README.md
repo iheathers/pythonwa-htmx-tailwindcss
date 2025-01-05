@@ -68,6 +68,18 @@ Follow these steps to set up and start working on the project.
 
    This serves the project at `http://localhost:5000`.
 
+In `index.html` change 
+
+```html
+  <!-- change hx-get='http://localhost:3000/api/events' for local development -->
+        <div hx-ext="client-side-templates" hx-get="https://pythonwa-htmx-tailwindcss-1.onrender.com/api/events"
+            mustache-array-template="events-template" hx-trigger="load" hx-swap="outerHTML">
+            Loading
+        </div>
+
+
+```
+
 ---
 
 ## **When to Use `npm run watch:css`**
